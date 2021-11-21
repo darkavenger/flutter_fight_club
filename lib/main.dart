@@ -73,6 +73,7 @@ class MyHomePageState extends State<MyHomePage> {
                     child: Center(
                       child: Text(
                         statusText,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 10, color: FightClubColors.darkGreyText),
                       ),
@@ -136,9 +137,12 @@ class MyHomePageState extends State<MyHomePage> {
         if (youLoseLife) {
           yourLives--;
           statusText = statusText +
-              "\n\nEnemy hit your ${whatEnemyAttacks.name.toLowerCase()}.";
+              """
+Enemy hit your ${whatEnemyAttacks.name.toLowerCase()}.""";
         } else {
-          statusText = statusText + "\n\nEnemy's attack was blocked.";
+          statusText = statusText +
+              """
+Enemy's attack was blocked.""";
         }
 
         if (enemysLives == 0 || yourLives == 0) {
@@ -398,7 +402,7 @@ class LivesWidget extends StatelessWidget {
             children: [
               Image.asset(imageName, width: 18, height: 18),
               SizedBox(
-                height: 4,
+                height: 3,
               )
             ],
           );
