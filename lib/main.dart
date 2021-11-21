@@ -62,7 +62,25 @@ class MyHomePageState extends State<MyHomePage> {
                 maxLivesCount: maxLives,
                 yourLivesCount: yourLives,
                 enemysLivesCount: enemysLives),
-            StatusText(text: statusText),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ColoredBox(
+                    color: FightClubColors.darkPurple,
+                    child: Center(
+                      child: Text(
+                        statusText,
+                        style: TextStyle(
+                            fontSize: 10, color: FightClubColors.darkGreyText),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             ControlsWidget(
               defendedBodyPart: defendedBodyPart,
               attackedBodyPart: attackedBodyPart,
@@ -112,7 +130,7 @@ class MyHomePageState extends State<MyHomePage> {
           statusText =
               "You hit enemy's ${attackedBodyPart?.name.toLowerCase()}.";
         } else {
-          statusText = "You attack was blocked.";
+          statusText = "Your attack was blocked.";
         }
 
         if (youLoseLife) {
@@ -152,37 +170,6 @@ class MyHomePageState extends State<MyHomePage> {
     setState(() {
       attackedBodyPart = value;
     });
-  }
-}
-
-class StatusText extends StatelessWidget {
-  final String text;
-
-  const StatusText({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
-        child: SizedBox(
-          width: double.infinity,
-          child: ColoredBox(
-            color: FightClubColors.darkPurple,
-            child: Center(
-              child: Text(
-                text,
-                style: TextStyle(
-                    fontSize: 10, color: FightClubColors.darkGreyText),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
 
@@ -407,6 +394,7 @@ class LivesWidget extends StatelessWidget {
               ? FightClubIcons.heartFull
               : FightClubIcons.heartEmpty;
           return Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(imageName, width: 18, height: 18),
               SizedBox(
