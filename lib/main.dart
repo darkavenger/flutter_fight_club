@@ -129,20 +129,17 @@ class MyHomePageState extends State<MyHomePage> {
         if (enemyLoseLife) {
           enemysLives--;
           statusText =
-              "You hit enemy's ${attackedBodyPart?.name.toLowerCase()}.";
+              "You hit enemy's ${attackedBodyPart?.name.toLowerCase()}.\n";
         } else {
-          statusText = "Your attack was blocked.";
+          statusText = "Your attack was blocked.\n";
         }
 
         if (youLoseLife) {
           yourLives--;
           statusText = statusText +
-              """
-Enemy hit your ${whatEnemyAttacks.name.toLowerCase()}.""";
+              "Enemy hit your ${whatEnemyAttacks.name.toLowerCase()}.";
         } else {
-          statusText = statusText +
-              """
-Enemy's attack was blocked.""";
+          statusText = statusText + "Enemy's attack was blocked.";
         }
 
         if (enemysLives == 0 || yourLives == 0) {
@@ -391,22 +388,17 @@ class LivesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(overallLivesCount, (index) {
-          String imageName = currentLivesCount > index
-              ? FightClubIcons.heartFull
-              : FightClubIcons.heartEmpty;
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(imageName, width: 18, height: 18),
-              SizedBox(
-                height: 3,
-              )
-            ],
-          );
-        }));
+    return SizedBox(
+      height: 106,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(overallLivesCount, (index) {
+            String imageName = currentLivesCount > index
+                ? FightClubIcons.heartFull
+                : FightClubIcons.heartEmpty;
+            return Image.asset(imageName, width: 18, height: 18);
+          })),
+    );
   }
 }
 
