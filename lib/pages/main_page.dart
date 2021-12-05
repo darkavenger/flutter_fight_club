@@ -63,7 +63,7 @@ class _MainPageContent extends StatelessWidget {
                 if (snapshot.data == "Lost") fightResult = FightResult.lost;
                 return Column(
                   children: [
-                    Text("Last fight result"),
+                    Text("Last fight result", style: TextStyle(fontSize: 14)),
                     FightResultWidget(fightResult: fightResult)
                   ],
                 );
