@@ -61,8 +61,7 @@ class _MainPageContent extends StatelessWidget {
                 }
                 return Column(
                   children: [
-                    Center(child: Text("Last fight result")),
-                    SizedBox(height: 12),
+                    Text("Last fight result"),
                     FightResultWidget(
                       fightResult: FightResult.calculateResult(
                         snapshot.data![0],
