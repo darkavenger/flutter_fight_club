@@ -44,30 +44,27 @@ class _MainPageContent extends StatelessWidget {
               ),
             ),
             Expanded(child: SizedBox()),
-            FutureBuilder<List>(
+            FutureBuilder<String?>(
               future: SharedPreferences.getInstance().then((value) {
-                List<int?> result = [
-                  value.getInt("lastyourLives"),
-                  value.getInt("lastenemysLives"),
-                ];
-                return result;
+                // List<int?> result = [
+                //   value.getInt("lastyourLives"),
+                //   value.getInt("lastenemysLives"),
+                // ];
+                return value.getString("last_fight_result");
               }),
               builder: (context, snapshot) {
-                if (!snapshot.hasData ||
-                    snapshot.data == null ||
-                    snapshot.data![0] == null ||
-                    snapshot.data![1] == null) {
+                if (!snapshot.hasData || snapshot.data == null) {
+                  // snapshot.data![0] == null ||
+                  // snapshot.data![1] == null) {
                   return SizedBox();
                 }
+                FightResult fightResult = FightResult.draw;
+                if (snapshot.data == "Won") fightResult = FightResult.won;
+                if (snapshot.data == "Lost") fightResult = FightResult.lost;
                 return Column(
                   children: [
                     Text("Last fight result"),
-                    FightResultWidget(
-                      fightResult: FightResult.calculateResult(
-                        snapshot.data![0],
-                        snapshot.data![1],
-                      )!,
-                    )
+                    FightResultWidget(fightResult: fightResult)
                   ],
                 );
               },
