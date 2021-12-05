@@ -160,6 +160,7 @@ class FightPageState extends State<FightPage> {
         sharedPreferences.setInt("stats_won", countWon);
         sharedPreferences.setInt("stats_lost", countLost);
         sharedPreferences.setInt("stats_draw", countDraw);
+        sharedPreferences.setString("last_fight_result", fightResult.result);
       });
     } else {
       statusText = enemyLoseLife
